@@ -91,7 +91,7 @@ export const FEATURES = [
   },
   {
     type: 7,
-    name: "Eye accessory",
+    name: "Ear accessory",
     assets: [
       "/ear-accessory/0.png",
       "/ear-accessory/1.png",
