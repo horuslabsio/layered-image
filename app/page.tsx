@@ -1,101 +1,165 @@
+"use client";
+import html2canvas from "html2canvas";
 import Image from "next/image";
+import { useRef, useState } from "react";
+import { FEATURES } from "./images";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [profile, setProfile] = useState({
+    0: "/backgrounds/0.png",
+    1: "/facial-variations/0.png",
+    2: "/clothes/0.png",
+    3: "/eyes/0.png",
+    4: "",
+    5: "/hairs/0.png",
+    6: "/eye-brows/0.png",
+    7: "",
+    8: "",
+  });
+  const elementRef = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const selectImage = (type: number, src: string) => {
+    setProfile((prev) => {
+      let update = { ...prev };
+      switch (type) {
+        case 0:
+          update[0] = src;
+          break;
+        case 1:
+          update[1] = src;
+          break;
+        case 2:
+          update[2] = src;
+          break;
+        case 3:
+          update[3] = src;
+          break;
+        case 4:
+          update[4] = src;
+          break;
+        case 5:
+          update[5] = src;
+          break;
+        case 6:
+          update[6] = src;
+          break;
+        case 7:
+          update[7] = src;
+          break;
+        case 8:
+          update[8] = src;
+          break;
+        default:
+          break;
+      }
+      return update;
+    });
+  };
+
+  const removeFeature = (type: number) => {
+    setProfile((prev) => {
+      const update = { ...prev };
+      switch (type) {
+        case 4:
+          update[4] = "";
+          break;
+        case 8:
+          update[8] = "";
+          break;
+        case 7:
+          update[7] = "";
+          break;
+        case 5:
+          update[5] = "";
+          break;
+
+        default:
+          break;
+      }
+      return update;
+    });
+  };
+
+  const exportImag = async () => {
+    if (!elementRef.current) return;
+    try {
+      const canvas = await html2canvas(elementRef.current, {
+        backgroundColor: null,
+      });
+
+      const dataURL = canvas.toDataURL();
+      const response = await fetch(dataURL);
+      const blob = await response.blob();
+
+      const imgUrl = URL.createObjectURL(blob);
+      console.log(imgUrl);
+
+      const imgElement = document.createElement("img");
+      imgElement.src = imgUrl;
+      document.body.appendChild(imgElement);
+    } catch (error) {}
+  };
+
+  return (
+    <main className="flex flex-col p-8 md:flex-row-reverse">
+      {/* <button onClick={exportImag}>click</button> */}
+      <div
+        ref={elementRef}
+        className="mx-auto w-full max-w-[450px] h-[450px] relative md:sticky md:top-20"
+      >
+        <Image alt="" src={profile[0]} fill className="w-full h-full" />
+        <Image alt="" src={profile[1]} fill className="w-full h-full" />
+        <Image alt="" src={profile[2]} fill className="w-full h-full" />
+        <Image alt="" src={profile[3]} fill className="w-full h-full" />
+        <Image alt="" src={profile[6]} fill className="w-full h-full" />
+        {profile[5] && (
+          <Image alt="" src={profile[5]} fill className="w-full h-full" />
+        )}
+        {profile[4] && (
+          <Image src={profile[4]} alt="" fill className="w-full h-full" />
+        )}
+        {profile[7] && (
+          <Image src={profile[7]} alt="" fill className="w-full h-full" />
+        )}
+        {profile[8] && (
+          <Image src={profile[8]} alt="" fill className="w-full h-full" />
+        )}
+      </div>
+      <div className="grid md:w-[50vw] gap-4 mt-8 ">
+        {FEATURES.map((feat, idx) => {
+          const { type, assets, name } = feat;
+          return (
+            <div className="w-[450px]" key={idx}>
+              {name}
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+                {assets.map((img, i) => {
+                  return (
+                    <div className="bg-stone-200 overflow-clip rounded-[8px]">
+                      <img
+                        className="cursor-pointer rounded-[8px]"
+                        onClick={() => selectImage(type, img)}
+                        key={img}
+                        src={img}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
+                {type === 8 || type === 7 || type === 5 || type === 4 ? (
+                  <div
+                    onClick={() => removeFeature(type)}
+                    className="bg-stone-200  cursor-pointer opacity-75 p-8 overflow-clip rounded-[8px]"
+                  >
+                    <img src="/remove.png" alt="" />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </main>
   );
 }
