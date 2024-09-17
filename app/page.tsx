@@ -99,40 +99,44 @@ export default function Home() {
       document.body.appendChild(imgElement);
     } catch (error) {}
   };
-  const draw = () => {
-    const canvas = document.getElementById("myCanvas");
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
+  // const draw = () => {
+  //   const canvas = document.getElementById("myCanvas");
+  //   if (canvas) {
+  //     const ctx = canvas.getContext("2d");
 
-      // Load multiple images
-      const image1 = new Image();
-      const image2 = new Image();
-      const image3 = new Image();
+  //     // Load multiple images
+  //     const image1 = new Image();
+  //     const image2 = new Image();
+  //     const image3 = new Image();
 
-      // Set the source of the images
-      image1.src = "/backgrounds/0.png"; // Red background image
-      image2.src = "https://via.placeholder.com/200/00FF00/FFFFFF?text=Image2"; // Green background image
-      image3.src = "https://via.placeholder.com/100/0000FF/FFFFFF?text=Image3"; // Blue background image
+  //     // Set the source of the images
+  //     image1.src = "/backgrounds/0.png"; // Red background image
+  //     image2.src = "https://via.placeholder.com/200/00FF00/FFFFFF?text=Image2"; // Green background image
+  //     image3.src = "https://via.placeholder.com/100/0000FF/FFFFFF?text=Image3"; // Blue background image
 
-      image1.onload = function () {
-        // Draw the first image (bottom layer)
-        ctx.drawImage(image1, 0, 0, 2000, 2000);
+  //     image1.onload = function () {
+  //       // Draw the first image (bottom layer)
+  //       ctx.drawImage(image1, 0, 0, 2000, 2000);
 
-        image2.onload = function () {
-          // Draw the second image on top of the first
-          ctx.drawImage(image2, 100, 100);
+  //       image2.onload = function () {
+  //         // Draw the second image on top of the first
+  //         ctx.drawImage(image2, 100, 100);
 
-          image3.onload = function () {
-            // Draw the third image on top of the second
-            ctx.drawImage(image3, 150, 150);
-          };
-        };
-      };
-    }
-  };
+  //         image3.onload = function () {
+  //           // Draw the third image on top of the second
+  //           ctx.drawImage(image3, 150, 150);
+  //         };
+  //       };
+  //     };
+  //   }
+  // };
   return (
     <main>
-      <button onClick={draw}>click now</button>
+      <button
+      // onClick={draw}
+      >
+        click now
+      </button>
       <canvas id="myCanvas"></canvas>
     </main>
     // <main className="flex flex-col p-8 md:flex-row-reverse">
