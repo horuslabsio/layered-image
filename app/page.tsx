@@ -1,6 +1,6 @@
 "use client";
 import html2canvas from "html2canvas";
-// import Image from "next/image";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { FEATURES } from "./images";
 
@@ -131,73 +131,71 @@ export default function Home() {
   //   }
   // };
   return (
-    <main>
-      <button
-      // onClick={draw}
-      >
-        click now
-      </button>
-      <canvas id="myCanvas"></canvas>
-    </main>
-    // <main className="flex flex-col p-8 md:flex-row-reverse">
-    //   {/* <button onClick={exportImag}>click</button> */}
-    //   <div
-    //     ref={elementRef}
-    //     className="mx-auto w-full max-w-[450px] h-[450px] relative md:sticky md:top-20"
-    //   >
-    //     <Image alt="" src={profile[0]} fill className="w-full h-full" />
-    //     <Image alt="" src={profile[1]} fill className="w-full h-full" />
-    //     <Image alt="" src={profile[2]} fill className="w-full h-full" />
-    //     <Image alt="" src={profile[3]} fill className="w-full h-full" />
-    //     <Image alt="" src={profile[6]} fill className="w-full h-full" />
-    //     {profile[5] && (
-    //       <Image alt="" src={profile[5]} fill className="w-full h-full" />
-    //     )}
-    //     {profile[4] && (
-    //       <Image src={profile[4]} alt="" fill className="w-full h-full" />
-    //     )}
-    //     {profile[7] && (
-    //       <Image src={profile[7]} alt="" fill className="w-full h-full" />
-    //     )}
-    //     {profile[8] && (
-    //       <Image src={profile[8]} alt="" fill className="w-full h-full" />
-    //     )}
-    //   </div>
-    //   <div className="grid md:w-[50vw] gap-4 mt-8 ">
-    //     {FEATURES.map((feat, idx) => {
-    //       const { type, assets, name } = feat;
-    //       return (
-    //         <div className="w-[450px]" key={idx}>
-    //           {name}
-    //           <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-    //             {assets.map((img, i) => {
-    //               return (
-    //                 <div className="bg-stone-200 overflow-clip rounded-[8px]">
-    //                   <img
-    //                     className="cursor-pointer rounded-[8px]"
-    //                     onClick={() => selectImage(type, img)}
-    //                     key={img}
-    //                     src={img}
-    //                     alt=""
-    //                   />
-    //                 </div>
-    //               );
-    //             })}
-    //             {type === 8 || type === 7 || type === 5 || type === 4 ? (
-    //               <div
-    //                 onClick={() => removeFeature(type)}
-    //                 className="bg-stone-200  cursor-pointer opacity-75 p-8 overflow-clip rounded-[8px]"
-    //               >
-    //                 <img src="/remove.png" alt="" />
-    //               </div>
-    //             ) : (
-    //               <></>
-    //             )}
-    //           </div>
-    //         </div>
-    //       );
-    //     })}
-    //   </div>
+    // <main>
+    //   <button
+    //     onClick={draw}
+    //   >click now</button>
+    //   <canvas id="myCanvas"></canvas>
     // </main>
+    <main className="flex flex-col p-8 md:flex-row-reverse">
+      {/* <button onClick={exportImag}>click</button> */}
+      <div
+        ref={elementRef}
+        className="mx-auto w-full max-w-[450px] h-[450px] relative md:sticky md:top-20"
+      >
+        <Image alt="" src={profile[0]} fill className="w-full h-full" />
+        <Image alt="" src={profile[1]} fill className="w-full h-full" />
+        <Image alt="" src={profile[2]} fill className="w-full h-full" />
+        <Image alt="" src={profile[3]} fill className="w-full h-full" />
+        <Image alt="" src={profile[6]} fill className="w-full h-full" />
+        {profile[5] && (
+          <Image alt="" src={profile[5]} fill className="w-full h-full" />
+        )}
+        {profile[4] && (
+          <Image src={profile[4]} alt="" fill className="w-full h-full" />
+        )}
+        {profile[7] && (
+          <Image src={profile[7]} alt="" fill className="w-full h-full" />
+        )}
+        {profile[8] && (
+          <Image src={profile[8]} alt="" fill className="w-full h-full" />
+        )}
+      </div>
+      <div className="grid md:w-[50vw] gap-4 mt-8 ">
+        {FEATURES.map((feat, idx) => {
+          const { type, assets, name } = feat;
+          return (
+            <div className="w-[450px]" key={idx}>
+              {name}
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+                {assets.map((img, i) => {
+                  return (
+                    <div className="bg-stone-200 overflow-clip rounded-[8px]">
+                      <img
+                        className="cursor-pointer rounded-[8px]"
+                        onClick={() => selectImage(type, img)}
+                        key={img}
+                        src={img}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
+                {type === 8 || type === 7 || type === 5 || type === 4 ? (
+                  <div
+                    onClick={() => removeFeature(type)}
+                    className="bg-stone-200  cursor-pointer opacity-75 p-8 overflow-clip rounded-[8px]"
+                  >
+                    <img src="/remove.png" alt="" />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </main>
   );
 }
