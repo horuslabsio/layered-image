@@ -7,14 +7,12 @@ import { FEATURES } from "./images";
 export default function Home() {
   const [profile, setProfile] = useState({
     0: "/backgrounds/0.png",
-    1: "/facial-variations/0.png",
+    1: "/body-attributes/0.png",
     2: "/clothes/0.png",
-    3: "/eyes/0.png",
-    4: "",
-    5: "/hairs/0.png",
-    6: "/eye-brows/0.png",
-    7: "",
-    8: "",
+    3: "/face-attributes/0.png",
+    4: "/head-attributes/0.png",
+    5: "",
+
   });
   const elementRef = useRef(null);
 
@@ -40,15 +38,7 @@ export default function Home() {
         case 5:
           update[5] = src;
           break;
-        case 6:
-          update[6] = src;
-          break;
-        case 7:
-          update[7] = src;
-          break;
-        case 8:
-          update[8] = src;
-          break;
+
         default:
           break;
       }
@@ -63,12 +53,10 @@ export default function Home() {
         case 4:
           update[4] = "";
           break;
-        case 8:
-          update[8] = "";
+        case 3:
+          update[3] = "";
           break;
-        case 7:
-          update[7] = "";
-          break;
+
         case 5:
           update[5] = "";
           break;
@@ -97,7 +85,7 @@ export default function Home() {
       const imgElement = document.createElement("img");
       imgElement.src = imgUrl;
       document.body.appendChild(imgElement);
-    } catch (error) {}
+    } catch (error) { }
   };
   // const draw = () => {
   //   const canvas = document.getElementById("myCanvas");
@@ -136,6 +124,7 @@ export default function Home() {
     //     onClick={draw}
     //   >click now</button>
     //   <canvas id="myCanvas"></canvas>
+
     // </main>
     <main className="flex flex-col p-8 md:flex-row-reverse">
       {/* <button onClick={exportImag}>click</button> */}
@@ -144,33 +133,29 @@ export default function Home() {
         className="mx-auto w-full max-w-[450px] h-[450px] relative md:sticky md:top-20"
       >
         <Image alt="" src={profile[0]} fill className="w-full h-full" />
-        <Image alt="" src={profile[1]} fill className="w-full h-full" />
-        <Image alt="" src={profile[2]} fill className="w-full h-full" />
-        <Image alt="" src={profile[3]} fill className="w-full h-full" />
-        <Image alt="" src={profile[6]} fill className="w-full h-full" />
         {profile[5] && (
           <Image alt="" src={profile[5]} fill className="w-full h-full" />
         )}
-        {profile[4] && (
-          <Image src={profile[4]} alt="" fill className="w-full h-full" />
-        )}
-        {profile[7] && (
-          <Image src={profile[7]} alt="" fill className="w-full h-full" />
-        )}
-        {profile[8] && (
-          <Image src={profile[8]} alt="" fill className="w-full h-full" />
-        )}
+        <Image alt="" src={profile[1]} fill className="w-full h-full" />
+        <Image alt="" src={profile[2]} fill className="w-full h-full" />
+        <Image alt="" src={profile[3]} fill className="w-full h-full" />
+        <Image alt="" src={profile[4]} fill className="w-full h-full" />
+
+        
+
+
       </div>
       <div className="grid md:w-[50vw] gap-4 mt-8 ">
         {FEATURES.map((feat, idx) => {
           const { type, assets, name } = feat;
+          console.log(type)
           return (
             <div className="w-[450px]" key={idx}>
               {name}
               <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
                 {assets.map((img, i) => {
                   return (
-                    <div className="bg-stone-200 overflow-clip rounded-[8px]">
+                    <div className={` ${type == 3 ? "bg-black" : "bg-stone-200"} overflow-clip rounded-[8px]`}>
                       <img
                         className="cursor-pointer rounded-[8px]"
                         onClick={() => selectImage(type, img)}
@@ -181,7 +166,7 @@ export default function Home() {
                     </div>
                   );
                 })}
-                {type === 8 || type === 7 || type === 5 || type === 4 ? (
+                {type === 3 || type === 5 || type === 4 ? (
                   <div
                     onClick={() => removeFeature(type)}
                     className="bg-stone-200  cursor-pointer opacity-75 p-8 overflow-clip rounded-[8px]"
