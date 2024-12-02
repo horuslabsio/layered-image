@@ -7,11 +7,11 @@ import { FEATURES } from "./images";
 export default function Home() {
   const [profile, setProfile] = useState({
     0: "/backgrounds/0.png",
-    1: "/body-attributes/0.png",
-    2: "/clothes/0.png",
+    1: "/body-attributes/6.png",
+    2: "/clothes/2.png",
     3: "/face-attributes/0.png",
-    4: "/head-attributes/0.png",
-    5: "",
+    4: "/head-attributes/5.png",
+    5: "/back-attributes/3.png",
 
   });
   const elementRef = useRef(null);
@@ -50,13 +50,15 @@ export default function Home() {
     setProfile((prev) => {
       const update = { ...prev };
       switch (type) {
-        case 4:
-          update[4] = "";
+        case 2:
+          update[2] = "";
           break;
         case 3:
           update[3] = "";
           break;
-
+        case 4:
+          update[4] = "";
+          break;
         case 5:
           update[5] = "";
           break;
@@ -141,7 +143,7 @@ export default function Home() {
         <Image alt="" src={profile[3]} fill className="w-full h-full" />
         <Image alt="" src={profile[4]} fill className="w-full h-full" />
 
-        
+
 
 
       </div>
@@ -166,7 +168,7 @@ export default function Home() {
                     </div>
                   );
                 })}
-                {type === 3 || type === 5 || type === 4 ? (
+                { type == 2 || type === 3 || type === 5 || type === 4 ? (
                   <div
                     onClick={() => removeFeature(type)}
                     className="bg-stone-200  cursor-pointer opacity-75 p-8 overflow-clip rounded-[8px]"
